@@ -1,3 +1,5 @@
-export type Todo = {
-  title: string;
+import { Event } from "./Event";
+
+export type RootState = {
+  event: Event;
 };
