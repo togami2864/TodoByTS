@@ -4,17 +4,16 @@ import eventActions from "./action";
 
 import { Event } from "../../domain/entity/Event";
 
-const init: Event = {
-  id: 0,
-  title: "",
-  body: "",
-};
+const init: Event[] = [
+  {
+    id: 0,
+    title: "",
+    body: "",
+  },
+];
 
 const eventReducer = reducerWithInitialState(init)
-  .case(eventActions.setEvent, (state, payload) => ({
-    ...state,
-    ...payload,
-  }))
+  .case(eventActions.setEvent, (state, payload) => [...state, { ...payload }])
   .case(eventActions.deleteEvent, (state, payload) => ({
     ...state,
     ...payload,
