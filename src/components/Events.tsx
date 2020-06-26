@@ -17,7 +17,7 @@ import {
 } from "@material-ui/core";
 
 const Events: React.FC = () => {
-  const events = useSelector((state: RootState) => state.event);
+  const events = useSelector((state: RootState) => state.events);
   return (
     <TableContainer>
       <Table>

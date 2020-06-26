@@ -16,14 +16,14 @@ type Props = {
 };
 
 const EventForm: React.FC = () => {
-  const event = useSelector((state: RootState) => state.event);
+  const events = useSelector((state: RootState) => state.events);
   const dispatch = useDispatch();
 
   const [title, setTitle] = useState("");
   const [body, setBody] = useState("");
 
   const handleSubmit = (member: Props) => {
-    const id = event.length === 0 ? 0 : event.length;
+    const id = events.length === 0 ? 0 : events.length;
     const newMember = {
       ...member,
       id,
@@ -34,8 +34,16 @@ const EventForm: React.FC = () => {
   };
 
   const deleteAllEvents = () => {
-    dispatch(eventActions.deleteAllEvent({}));
+    const result = window.confirm(
+      "全てのイベントを本当に削除しても良いですか？"
+    );
+    if (result) {
+      dispatch(eventActions.deleteAllEvent({}));
+    }
   };
+
+  const isEmptyValue = title === "" && body === "";
+  const isEmptyEvents = events.length === 1;
 
   return (
     <>
@@ -63,10 +71,12 @@ const EventForm: React.FC = () => {
       </form>
       <Button
         color="primary"
+        style={{ marginRight: "10px" }}
         type="submit"
         variant="contained"
         endIcon={<Icon>send</Icon>}
         onClick={() => handleSubmit({ title, body })}
+        disabled={isEmptyValue}
       >
         イベント作成
       </Button>
@@ -76,6 +86,7 @@ const EventForm: React.FC = () => {
         variant="contained"
         endIcon={<DeleteIcon />}
         onClick={() => deleteAllEvents()}
+        disabled={isEmptyEvents}
       >
         全て削除
       </Button>

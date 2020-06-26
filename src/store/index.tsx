@@ -6,7 +6,7 @@ import { RootState } from "../domain/entity/RootState";
 
 const store = createStore(
   combineReducers<RootState>({
-    event: eventReducer,
+    events: eventReducer,
   }),
   compose(
     (window as any).__REDUX_DEVTOOLS_EXTENSION__ &&
