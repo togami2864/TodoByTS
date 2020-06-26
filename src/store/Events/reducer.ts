@@ -13,12 +13,9 @@ const init: Event[] = [
 ];
 
 const eventReducer = reducerWithInitialState(init)
-  .case(eventActions.setEvent, (state, payload) => [...state, { ...payload }])
+  .case(eventActions.setEvent, (state, payload) => [...state, payload])
+  .case(eventActions.deleteAllEvent, () => [])
   .case(eventActions.deleteEvent, (state, payload) => ({
-    ...state,
-    ...payload,
-  }))
-  .case(eventActions.deleteAllEvent, (state, payload) => ({
     ...state,
     ...payload,
   }));
