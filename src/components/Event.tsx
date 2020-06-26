@@ -16,11 +16,11 @@ const Event: React.FC = () => {
     dispatch(eventActions.deleteEvent(id));
   };
   return (
-    <TableRow>
+    <>
       {events.map(
         (event: IEvent, i) =>
           event.id !== 0 && (
-            <React.Fragment key={i}>
+            <TableRow key={i}>
               <TableCell>
                 <input type="checkbox" />
               </TableCell>
@@ -37,10 +37,10 @@ const Event: React.FC = () => {
                   削除
                 </Button>
               </TableCell>
-            </React.Fragment>
+            </TableRow>
           )
       )}
-    </TableRow>
+    </>
   );
 };
 

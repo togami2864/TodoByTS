@@ -10,11 +10,6 @@ const init: Event[] = [
     title: "",
     body: "",
   },
-  {
-    id: 1,
-    title: "テスト１",
-    body: "テスト１",
-  },
 ];
 
 const eventReducer = reducerWithInitialState(init)
