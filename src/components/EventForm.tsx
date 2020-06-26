@@ -27,6 +27,7 @@ const EventForm: React.FC = () => {
     const newMember = {
       ...member,
       id,
+      flag: false,
     };
     dispatch(eventActions.setEvent(newMember));
     setTitle("");

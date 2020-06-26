@@ -18,6 +18,10 @@ const Event: React.FC = () => {
       dispatch(eventActions.deleteEvent(id));
     }
   };
+
+  const handleReverseFlag = (id: number) => {
+    dispatch(eventActions.handleReverseFlag(id));
+  };
   return (
     <>
       {events.map(
@@ -25,7 +29,7 @@ const Event: React.FC = () => {
           event.id !== 0 && (
             <TableRow key={i} hover>
               <TableCell>
-                <Checkbox />
+                <Checkbox onChange={() => handleReverseFlag(event.id)} />
               </TableCell>
               <TableCell>{event.id}</TableCell>
               <TableCell>{event.title}</TableCell>

@@ -9,6 +9,7 @@ const init: Event[] = [
     id: 0,
     title: "",
     body: "",
+    flag: false,
   },
 ];
 
@@ -19,10 +20,19 @@ const eventReducer = reducerWithInitialState(init)
       id: 0,
       title: "",
       body: "",
+      flag: false,
     },
   ])
   .case(eventActions.deleteEvent, (state, payload) => {
     state = state.filter((e) => e.id !== payload);
+    return [...state];
+  })
+  .case(eventActions.handleReverseFlag, (state, payload) => {
+    state.forEach((e) => {
+      if (e.id === payload) {
+        e.flag = !e.flag;
+      }
+    });
     return [...state];
   });
 
