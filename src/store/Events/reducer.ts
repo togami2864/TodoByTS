@@ -10,11 +10,22 @@ const init: Event[] = [
     title: "",
     body: "",
   },
+  {
+    id: 1,
+    title: "テスト１",
+    body: "テスト１",
+  },
 ];
 
 const eventReducer = reducerWithInitialState(init)
   .case(eventActions.setEvent, (state, payload) => [...state, payload])
-  .case(eventActions.deleteAllEvent, () => [])
+  .case(eventActions.deleteAllEvent, (state, payload) => [
+    {
+      id: 0,
+      title: "",
+      body: "",
+    },
+  ])
   .case(eventActions.deleteEvent, (state, payload) => ({
     ...state,
     ...payload,

@@ -33,6 +33,10 @@ const EventForm: React.FC = () => {
     setBody("");
   };
 
+  const deleteAllEvents = () => {
+    dispatch(eventActions.deleteAllEvent({}));
+  };
+
   return (
     <>
       <form>
@@ -71,6 +75,7 @@ const EventForm: React.FC = () => {
         type="button"
         variant="contained"
         endIcon={<DeleteIcon />}
+        onClick={() => deleteAllEvents()}
       >
         全て削除
       </Button>
