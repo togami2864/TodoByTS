@@ -1,14 +1,20 @@
 import React from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 
 import { Event as IEvent } from "../domain/entity/Event";
 import { RootState } from "../domain/entity/RootState";
+
+import eventActions from "../store/Events/action";
 
 import { Button } from "@material-ui/core";
 import { TableRow, TableCell } from "@material-ui/core";
 
 const Event: React.FC = () => {
   const events = useSelector((state: RootState) => state.event);
+  const dispatch = useDispatch();
+  const handleDelete = (id: number) => {
+    dispatch(eventActions.deleteEvent(id));
+  };
   return (
     <TableRow>
       {events.map(
@@ -22,7 +28,12 @@ const Event: React.FC = () => {
               <TableCell>{event.title}</TableCell>
               <TableCell>{event.body}</TableCell>
               <TableCell>
-                <Button type="button" color="secondary" variant="contained">
+                <Button
+                  type="button"
+                  color="secondary"
+                  variant="contained"
+                  onClick={() => handleDelete(event.id)}
+                >
                   削除
                 </Button>
               </TableCell>

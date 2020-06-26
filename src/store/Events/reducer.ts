@@ -26,9 +26,9 @@ const eventReducer = reducerWithInitialState(init)
       body: "",
     },
   ])
-  .case(eventActions.deleteEvent, (state, payload) => ({
-    ...state,
-    ...payload,
-  }));
+  .case(eventActions.deleteEvent, (state, payload) => {
+    state = state.filter((e) => e.id !== payload);
+    return [...state];
+  });
 
 export default eventReducer;
