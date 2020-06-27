@@ -47,8 +47,6 @@ const EventForm: React.FC = () => {
   const isEmptyValue = title === "" && body === "";
   const isEmptyEvents = events.length === 1;
 
-  console.log(events[0].count);
-
   return (
     <>
       <form>

@@ -7,7 +7,14 @@ import Event from "./Event";
 import { Event as IEvent } from "../domain/entity/Event";
 import { RootState } from "../domain/entity/RootState";
 
-import { CircularProgressbar } from "react-circular-progressbar";
+import {
+  CircularProgressbar,
+  CircularProgressbarWithChildren,
+  buildStyles,
+} from "react-circular-progressbar";
+import "./styles/progressbar.css";
+import { easeQuadInOut } from "d3-ease";
+import AnimatedProgressProvider from "./AnimateProgressProvider";
 
 import {
   TableContainer,
@@ -21,27 +28,50 @@ import {
 
 const Events: React.FC = () => {
   const events = useSelector((state: RootState) => state.events);
+
+  const progress =
+    events.length > 1 ? (events[0].count / (events.length - 1)) * 100 : 0;
   return (
     <>
-      <Grid item xs={7}>
-        <TableContainer>
-          <Table>
-            <TableHead>
-              <TableRow>
-                <TableCell></TableCell>
-                <TableCell>ID</TableCell>
-                <TableCell>タイトル</TableCell>
-                <TableCell>ボディ</TableCell>
-                <TableCell></TableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              <Event />
-            </TableBody>
-          </Table>
-        </TableContainer>
+      <Grid container>
+        <Grid item xs={7}>
+          <TableContainer>
+            <Table>
+              <TableHead>
+                <TableRow>
+                  <TableCell></TableCell>
+                  <TableCell>ID</TableCell>
+                  <TableCell>タイトル</TableCell>
+                  <TableCell>ボディ</TableCell>
+                  <TableCell></TableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                <Event />
+              </TableBody>
+            </Table>
+          </TableContainer>
+        </Grid>
+        <Grid item xs={5}>
+          <AnimatedProgressProvider
+            valueStart={0}
+            valueEnd={progress}
+            duration={1.4}
+            easingFunction={easeQuadInOut}
+          >
+            {(value) => {
+              const roundedValue = Math.round(progress);
+              return (
+                <CircularProgressbar
+                  value={value}
+                  text={`${roundedValue}%`}
+                  styles={buildStyles({ pathTransition: "none" })}
+                />
+              );
+            }}
+          </AnimatedProgressProvider>
+        </Grid>
       </Grid>
-      <Grid item xs={3}></Grid>
     </>
   );
 };
