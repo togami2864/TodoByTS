@@ -3,4 +3,5 @@ export type Event = {
   title: string;
   body: string;
   flag: boolean;
+  count: number;
 };

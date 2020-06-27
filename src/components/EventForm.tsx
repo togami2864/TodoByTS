@@ -28,6 +28,7 @@ const EventForm: React.FC = () => {
       ...member,
       id,
       flag: false,
+      count: events[0].count,
     };
     dispatch(eventActions.setEvent(newMember));
     setTitle("");
@@ -45,6 +46,8 @@ const EventForm: React.FC = () => {
 
   const isEmptyValue = title === "" && body === "";
   const isEmptyEvents = events.length === 1;
+
+  console.log(events[0].count);
 
   return (
     <>

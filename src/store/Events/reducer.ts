@@ -10,6 +10,7 @@ const init: Event[] = [
     title: "",
     body: "",
     flag: false,
+    count: 0,
   },
 ];
 
@@ -21,10 +22,16 @@ const eventReducer = reducerWithInitialState(init)
       title: "",
       body: "",
       flag: false,
+      count: 0,
     },
   ])
   .case(eventActions.deleteEvent, (state, payload) => {
     state = state.filter((e) => e.id !== payload);
+
+    //checkが入っているイベントの数の計算//
+    const checked = state.filter((event) => event.flag);
+    state.map((event) => (event.count = checked.length));
+    ///////////////////////////////
     return [...state];
   })
   .case(eventActions.handleReverseFlag, (state, payload) => {
@@ -33,6 +40,11 @@ const eventReducer = reducerWithInitialState(init)
         e.flag = !e.flag;
       }
     });
+    //checkが入っているイベントの数の計算//
+    const checked = state.filter((event) => event.flag);
+    state.map((event) => (event.count = checked.length));
+    ///////////////////////////////
+
     return [...state];
   });
 
